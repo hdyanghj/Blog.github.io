@@ -365,144 +365,16 @@
       
         
           
-            <h2 id="git的一些基础命令"><a href="#git的一些基础命令" class="headerlink" title="git的一些基础命令"></a>git的一些基础命令</h2><h3 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h3><p>请确保已经安装里git客户端</p>
-<h3 id="一般配置"><a href="#一般配置" class="headerlink" title="一般配置"></a>一般配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git --version   //查看git的版本信息</span><br><span class="line">git config --global user.name   //获取当前登录的用户</span><br><span class="line">git config --global user.email  //获取当前登录用户的邮箱</span><br></pre></td></tr></table></figure>
-<h4 id="登录git"><a href="#登录git" class="headerlink" title="登录git"></a>登录git</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/* 如果刚没有获取到用户配置，则只能拉取代码，不能修改  要是使用git，你要告诉git是谁在使用*/</span><br><span class="line">git config --global user.name &apos;userName&apos;    //设置git账户，userName为你的git账号，</span><br><span class="line">git config --global user.email &apos;email&apos;</span><br></pre></td></tr></table></figure>
-<h4 id="创建一个文件夹"><a href="#创建一个文件夹" class="headerlink" title="创建一个文件夹"></a>创建一个文件夹</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir nodejs    //创建文件夹nodejs</span><br><span class="line">cd nodejs       //切换到nodejs目录下</span><br></pre></td></tr></table></figure>
-<h4 id="初始化git仓库"><a href="#初始化git仓库" class="headerlink" title="初始化git仓库"></a>初始化git仓库</h4><p><code>git init //在nodejs文件夹下初始化一个仓库，此时文件里会到一个.git的隐藏文件夹</code></p>
-<h4 id="创建忽略文件"><a href="#创建忽略文件" class="headerlink" title="创建忽略文件"></a>创建忽略文件</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">touch .gitignore    //不需要服务器端提交的内容可以写到忽略文件里</span><br><span class="line">    /*</span><br><span class="line">        .git</span><br><span class="line">        .idea</span><br><span class="line">    */</span><br></pre></td></tr></table></figure>
-<h4 id="查看目录"><a href="#查看目录" class="headerlink" title="查看目录"></a>查看目录</h4><p><code>ls -al</code></p>
-<h4 id="创建文件并写入内容"><a href="#创建文件并写入内容" class="headerlink" title="创建文件并写入内容"></a>创建文件并写入内容</h4><ul>
-<li>如果文件不存在则会创建文件</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"hello git"</span></span><br><span class="line"> &gt; index.html       //将<span class="string">'hello git'</span> 写入到index.html中</span><br><span class="line">单个&gt;箭头表示写入， &gt;&gt;表示追加</span><br></pre></td></tr></table></figure>
-<h4 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h4><p><code>cat index.html</code></p>
-<h4 id="增加到暂存区中"><a href="#增加到暂存区中" class="headerlink" title="增加到暂存区中"></a>增加到暂存区中</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add index.html</span><br><span class="line">git add -A      //全部添加到缓存区</span><br></pre></td></tr></table></figure>
-<h4 id="增加到版本库中"><a href="#增加到版本库中" class="headerlink" title="增加到版本库中"></a>增加到版本库中</h4><p><code>git commit -m &#39;备注信息&#39;</code></p>
-<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><p><code>git log --oneline</code></p>
-<h4 id="比较差异"><a href="#比较差异" class="headerlink" title="比较差异"></a>比较差异</h4><ul>
-<li>比较的是暂存区和工作区的差异</li>
-</ul>
-<p><code>git diff</code></p>
-<ul>
-<li>比较的是暂存区和历史区的差异</li>
-</ul>
-<p><code>git diff --cached</code></p>
-<ul>
-<li>比较的是历史区和工作区的差异（修改）</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff master</span><br></pre></td></tr></table></figure>
-<p>撤回内容</p>
-<p><code>(如果修改了工作区的文件后发现改错了，可以用暂存区或者版本库里的文件替换掉工作区的文件)</code></p>
-<ul>
-<li>用暂存区中的内容或者版本库中的内容覆盖掉工作区</li>
-</ul>
-<p><code>git checkout index.html</code></p>
-<ul>
-<li>取消增加到暂存区的内容（添加时）</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD index.html</span><br><span class="line">//显示目录的状体 有没有添加或者修改文件</span><br><span class="line">git status</span><br></pre></td></tr></table></figure>
-<h4 id="删除本地文件"><a href="#删除本地文件" class="headerlink" title="删除本地文件"></a>删除本地文件</h4><p><code>rm fileName</code></p>
-<h4 id="删除暂存区"><a href="#删除暂存区" class="headerlink" title="删除暂存区"></a>删除暂存区</h4><ul>
-<li>保证当前工作区中没有index.html</li>
-</ul>
-<p><code>git rm index.html --cached</code></p>
-<p><code>使用--cached 表示只删除缓存区中的内容</code></p>
-<h4 id="回滚版本"><a href="#回滚版本" class="headerlink" title="回滚版本"></a>回滚版本</h4><ul>
-<li>回滚最近的一个版本 git log</li>
-</ul>
-<p><code>git reset --hard HEAD/commit_id</code></p>
-<h4 id="回滚到未来"><a href="#回滚到未来" class="headerlink" title="回滚到未来"></a>回滚到未来</h4><p><code>git reflog</code></p>
-<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><h4 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h4><p><code>git branch dev</code></p>
-<h4 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h4><p><code>git checkout dev</code></p>
-<h4 id="创建分支并切换分支"><a href="#创建分支并切换分支" class="headerlink" title="创建分支并切换分支"></a>创建分支并切换分支</h4><p><code>git checkout -b dev</code></p>
-<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><p><code>git branch -d dev</code></p>
-<h4 id="在分支上提交新的版本"><a href="#在分支上提交新的版本" class="headerlink" title="在分支上提交新的版本"></a>在分支上提交新的版本</h4><p><code>git commit -a -m &#39;dev1&#39;</code></p>
-<h4 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h4><p><code>git merge dev</code></p>
-<h4 id="分支的合并后显示log"><a href="#分支的合并后显示log" class="headerlink" title="分支的合并后显示log"></a>分支的合并后显示log</h4><p><code>git log --oneline --graph --decorate</code></p>
-<h4 id="在分支开发的过程中遇到其他问题需要切换其他分支"><a href="#在分支开发的过程中遇到其他问题需要切换其他分支" class="headerlink" title="在分支开发的过程中遇到其他问题需要切换其他分支"></a>在分支开发的过程中遇到其他问题需要切换其他分支</h4><ul>
-<li>保留写好的内容在切换到主干</li>
-<li>保留内容</li>
-</ul>
-<p><code>git stash</code></p>
-<h4 id="在次切换分之后需要应用一下保留的内容"><a href="#在次切换分之后需要应用一下保留的内容" class="headerlink" title="在次切换分之后需要应用一下保留的内容"></a>在次切换分之后需要应用一下保留的内容</h4><p><code>git stash apply</code></p>
-<h4 id="丢掉保存的内容"><a href="#丢掉保存的内容" class="headerlink" title="丢掉保存的内容"></a>丢掉保存的内容</h4><p><code>git stash drop</code></p>
-<h4 id="使用并丢掉"><a href="#使用并丢掉" class="headerlink" title="使用并丢掉"></a>使用并丢掉</h4><p><code>git stash pop</code></p>
-<h4 id="最佳分支"><a href="#最佳分支" class="headerlink" title="最佳分支"></a>最佳分支</h4><ul>
-<li>-有的时候开发需要合并指定的内容，而不是合并所有的提交，所以我们需要挑选最好的，自己生产版本</li>
-</ul>
-<h4 id="合并分支把树杈掰到主干上"><a href="#合并分支把树杈掰到主干上" class="headerlink" title="合并分支把树杈掰到主干上"></a>合并分支把树杈掰到主干上</h4><p><code>git rebase</code></p>
-<h3 id="添加远程的仓库"><a href="#添加远程的仓库" class="headerlink" title="添加远程的仓库"></a>添加远程的仓库</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">push -u</span><br><span class="line">-u参数 upstream</span><br><span class="line">git push origin master -u   //获取最新代码</span><br></pre></td></tr></table></figure>
-<h4 id="连接远程仓库"><a href="#连接远程仓库" class="headerlink" title="连接远程仓库"></a>连接远程仓库</h4><p><code>git remote add origin 仓库的地址</code></p>
-<h4 id="查看远程仓库"><a href="#查看远程仓库" class="headerlink" title="查看远程仓库"></a>查看远程仓库</h4><p><code>git remote -v</code></p>
-<h4 id="删除远程仓库"><a href="#删除远程仓库" class="headerlink" title="删除远程仓库"></a>删除远程仓库</h4><p><code>git remote rm origin</code></p>
-<h3 id="git常用命令"><a href="#git常用命令" class="headerlink" title="git常用命令"></a>git常用命令</h3><h4 id="安装及配置："><a href="#安装及配置：" class="headerlink" title="安装及配置："></a>安装及配置：</h4><ul>
-<li>Ubuntu下安装：<code>sudo apt-get install git</code></li>
-<li>配置用户名：<code>git config --global user.name &quot;你的名字&quot;</code></li>
-<li>配置e-mail：<code>git config --global user.email &quot;你的邮箱@xx.com&quot;</code></li>
-</ul>
-<h4 id="与添加有关的："><a href="#与添加有关的：" class="headerlink" title="与添加有关的："></a>与添加有关的：</h4><ul>
-<li>将当前目录变为仓库：<code>git init</code></li>
-<li>将文件添加到暂存区：<code>git add 文件名 [可选：另一个文件名]</code></li>
-<li>将暂存区提交到仓库：<code>git commit –m &quot;描述&quot;</code></li>
-</ul>
-<h4 id="与查询有关的："><a href="#与查询有关的：" class="headerlink" title="与查询有关的："></a>与查询有关的：</h4><ul>
-<li>查询仓库状态：<code>git status</code></li>
-<li>比较文件差异（请在git add之前使用）：<code>git diff 文件名</code></li>
-<li>查看仓库历史记录(详细)：<code>git log</code></li>
-<li>查看仓库历史记录(单行)：<code>git log --pretty=online 或 git log --online</code></li>
-<li>查看所有版本的commit ID：<code>git reflog</code></li>
-</ul>
-<h4 id="与撤销有关的："><a href="#与撤销有关的：" class="headerlink" title="与撤销有关的："></a>与撤销有关的：</h4><ul>
-<li>撤销工作区的修改：<code>git checkout -- 文件名</code></li>
-<li>撤销暂存区的修改：<code>git reset HEAD 文件名</code></li>
-<li>回退到历史版本：<code>git reset --hard 该版本ID</code></li>
-<li>回退到上个版本：<code>git reset --hard HEAD^</code></li>
-<li>上上版本是<code>HEAD^^</code>，也可用<code>HEAD~2</code>表示，以此类推</li>
-</ul>
-<h4 id="与标签有关的："><a href="#与标签有关的：" class="headerlink" title="与标签有关的："></a>与标签有关的：</h4><ul>
-<li>为当前版本打标签：<code>git tag 标签名</code></li>
-<li>为历史版本打标签：<code>git tag 标签名 该版本ID</code></li>
-<li>指定标签说明：<code>git tag –a 标签名 –m &quot;标签说明&quot; [可选：版本ID]</code></li>
-<li>查看所有标签：<code>git tag</code></li>
-<li>查看某一标签：<code>git show 标签名</code></li>
-<li>删除某一标签：<code>git tag –d 标签名</code></li>
-</ul>
-<h4 id="与GitHub有关的："><a href="#与GitHub有关的：" class="headerlink" title="与GitHub有关的："></a>与GitHub有关的：</h4><ul>
-<li><p>先有本地库，后有远程库，将本地库push到远程库</p>
-</li>
-<li><p>关联本地仓库和GitHub库：<code>git remote add origin 网站上的仓库地址</code></p>
-</li>
-<li><p>第一次将本地仓库推送到GitHub上：<code>git push –u origin master</code></p>
-</li>
-<li><p>先有远程库，后有本地库，从远程库clone到本地库</p>
-</li>
-<li><p>从远程库克隆到本地：<code>git clone 网站上的仓库地址</code></p>
-</li>
-<li><p>网站地址可以选择HTTPS协议（<code>https://github.com...</code>）、SSH协议（<a href="mailto:`git@github.com" target="_blank" rel="noopener">`git@github.com</a>…`）。</p>
-</li>
-<li>如果选择SSH协议，必须将Ubuntu的公钥添加到GitHub上。见下一步</li>
-</ul>
-<h4 id="SSH-Key"><a href="#SSH-Key" class="headerlink" title="SSH Key"></a>SSH Key</h4><ul>
-<li><p>生成SSH Key：<code>ssh-keygen –t rsa –C &quot;你的邮箱@xx.com&quot;</code></p>
-</li>
-<li><p>生成Key时弹出选项，回车选择默认即可。</p>
-</li>
-<li><p>Key保存位置：<code>/root/.ssh</code></p>
-</li>
-<li><p>登陆GitHub，创建new SSH key，其内容为<code>/root/.ssh/id_rsa.pub</code>中文本</p>
-</li>
-</ul>
-<ul>
-<li><p>已经有了本地库和远程库，二者实现同步</p>
-</li>
-<li><p>本地库的改动提交到远程库：<code>git push origin master</code></p>
-</li>
-<li><p>更新本地库至远程库的最新改动：<code>git pull</code></p>
-</li>
-</ul>
-
-          
+          git的一些基础命令Git常用命令请确保已经安装里git客户端
+一般配置123git --version   //查看git的版本信息git config --global user.name   //获取当前登录的用户git config --global user.email  //获取当前登录
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/12/安装Git到我的电脑/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -648,14 +520,17 @@
       
         
           
-            <p>搜了很多教程，汇总如下：</p>
-<h3 id="个性化修改"><a href="#个性化修改" class="headerlink" title="个性化修改"></a>个性化修改</h3><h4 id="1-给Next添加角标Fork-Me-On-GitHub"><a href="#1-给Next添加角标Fork-Me-On-GitHub" class="headerlink" title="1.给Next添加角标Fork Me On GitHub"></a>1.给Next添加角标<code>Fork Me On GitHub</code></h4><p>点击<a href="https://github.com/blog/273-github-ribbons" target="_blank" rel="noopener">GitHub Ribbons</a> 或者 <a href="https://hexo.io/" target="_blank" rel="noopener">GitHub Corners</a>挑选自己喜欢的样式，并复制代码。 例如，我是复制如下代码：<br><img src="/images/GitHub_Corners.png" alt="GitHub Corners"><br><img src="/images/GitHub_Corners.png" alt="GitHub Corners"></p>
-<h5 id="具体实现方法"><a href="#具体实现方法" class="headerlink" title="具体实现方法"></a>具体实现方法</h5><p>然后用编辑器打开<code>Hexo</code>目录下的<code>themes/next/layout/_layout.swig</code>文件，并粘贴刚刚复制的代码。<br>粘贴位置如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;headband&quot;&gt;&lt;/div&gt;</span><br><span class="line">&quot;-----------粘贴在这里-----------&quot;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/github_zt.png" alt="粘贴位置"></p>
-<h5 id="实现效果图"><a href="#实现效果图" class="headerlink" title="实现效果图"></a>实现效果图</h5><p><img src="/images/Next_xgt.png" alt="实现效果图"></p>
-
-          
+          搜了很多教程，汇总如下：
+个性化修改1.给Next添加角标Fork Me On GitHub点击GitHub Ribbons 或者 GitHub Corners挑选自己喜欢的样式，并复制代码。 例如，我是复制如下代码：
+具体实现方法然后用编辑器打开Hexo目录下的themes/next/layout
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/12/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
